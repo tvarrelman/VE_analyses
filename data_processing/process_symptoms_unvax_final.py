@@ -9,12 +9,8 @@ Created on Wed Jan 19 15:31:05 2022
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from datetime import datetime
 import os
-from itertools import groupby
-from operator import itemgetter
 import itertools
 
 
@@ -96,7 +92,7 @@ def process_data(file_path, file):
 
 
 # path to the source files
-file_path = "/Users/tannervarrelman/Documents/Comms_med_VE/data/Countries_2_22_22/"
+file_path = "../data/"
 # each file contains data for particular country
 dir_list = os.listdir(file_path)
 file_list = [x for x in dir_list if '22.csv' in x]
@@ -110,8 +106,8 @@ for file in file_list:
     iso_df, country = process_data(file_path, file)
     for cli in sympt_combo:
         cli_df = cli_calc2(iso_df, cli_df, cli, country, country, 14)
-output_path = "/Users/tannervarrelman/Documents/Comms_med_VE/data/output/"
+output_path = "../data/output/"
 
-cli_df.to_csv(output_path + 'GTM_MEX_ZAF_every_cli_unvax_2week_1_15_23.csv', header=True, index=False)
+cli_df.to_csv(output_path + 'GTM_MEX_ZAF_every_cli_unvax_2week.csv', header=True, index=False)
 
 

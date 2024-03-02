@@ -8,16 +8,9 @@ Created on Wed Dec 15 09:56:08 2021
 
 import pandas as pd
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 from datetime import timedelta, date, datetime
-import itertools
-import matplotlib.dates as mdates
-import statsmodels.api as sm
 import os
 import itertools
-from functools import reduce
-# import pylogit as pl
 
 
 def vacc_eff_cli2(data, results, region, iso_3, cli_list, window):
@@ -94,7 +87,6 @@ def process_data(file_path, file):
     main_df['b1_13'] = main_df['b1_13'].replace([-99, -77, np.nan], 2)
     main_df['e3'] = main_df['e3'].replace([-99, -77], np.nan)
     main_df['e4'] = main_df['e4'].replace([-99, -77], np.nan)
-    # main_df = main_df[main_df['recordeddate']>="2021-05-01"]
     # Add this step to ensure that the file name is for the correct country
     main_df = main_df[(main_df['iso_3']==iso_code)].reset_index(drop=True)
     if len(main_df) == 0:
@@ -111,12 +103,12 @@ def data_agg(df, start_date, end_date):
     return data_sub
 
 # get the list of UMD-CTIS line-list files for GTM, MEX, ZAF
-file_path = "/Users/tannervarrelman/Documents/Comms_med_VE/data/Countries_2_22_22/"
+file_path = "../data/"
 dir_list = os.listdir(file_path)
 file_list = [x for x in dir_list if '_22.csv' in x]
 
-output_path = "/Users/tannervarrelman/Documents/Comms_med_VE/data/output/"
-window_df = pd.read_csv(output_path + "GTM_MEX_ZAF_date_windows_median_1_15_23.csv")
+output_path = "../data/output/"
+window_df = pd.read_csv(output_path + "GTM_MEX_ZAF_date_windows_median.csv")
 
 sympt_list = ['b1_1', 'b1_2', 'b1_3', 'b1_4', 'b1_5', 'b1_6', 'b1_7',
               'b1_8', 'b1_9', 'b1_10', 'b1_12', 'b1_13']
@@ -131,7 +123,7 @@ for file in file_list:
     for cli in sympt_combo:
         results_df = vacc_eff_cli2(main_df, results_df, region, region, cli, window_sub)
 
-results_df.to_csv(output_path + "GTM_MEX_ZAF_regression_df_2dose_8_27_23.csv", header=True, index=False)
+results_df.to_csv(output_path + "GTM_MEX_ZAF_regression_df_2dose.csv", header=True, index=False)
 
 
 

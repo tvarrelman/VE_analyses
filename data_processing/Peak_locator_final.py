@@ -9,15 +9,11 @@ Created on Fri Jan 21 10:03:13 2022
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from itertools import compress
 from scipy.signal import argrelextrema
-import seaborn as sns
 from datetime import timedelta, date, datetime
 
-
-#sympt_df = pd.read_csv('/Users/tannervarrelman/Documents/BCH_FB/PLOS_submission/data/GTM_MEX_ZAF_every_cli_unvax_2week_2_28_22.csv')
-output_path = "/Users/tannervarrelman/Documents/Comms_med_VE/data/output/"
-sympt_df = pd.read_csv(output_path + 'GTM_MEX_ZAF_every_cli_unvax_2week_1_15_23.csv')
+output_path = "../data/output/"
+sympt_df = pd.read_csv(output_path + 'GTM_MEX_ZAF_every_cli_unvax_2week.csv')
 
 window_df = pd.DataFrame()
 peak_list = []
@@ -70,6 +66,6 @@ for region in window_df.Region.unique():
                                               'Region': region,
                                               'wave_p': wave}, ignore_index=True)
    
-window_filter.to_csv(output_path + 'GTM_MEX_ZAF_date_windows_median_1_15_23.csv', index=False, header=True)  
+window_filter.to_csv(output_path + 'GTM_MEX_ZAF_date_windows_median.csv', index=False, header=True)  
 
 

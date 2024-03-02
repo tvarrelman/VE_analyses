@@ -141,12 +141,12 @@ def main():
         This function runs the data processing program.
     """
     # get the list of UMD-CTIS line-list files for GTM, MEX, ZAF
-    file_path = "/Users/tannervarrelman/Documents/Comms_med_VE/data/Countries_2_22_22/"
+    file_path = "../data/"
     dir_list = os.listdir(file_path)
     file_list = [x for x in dir_list if '_22.csv' in x]
 
-    output_path = "/Users/tannervarrelman/Documents/Comms_med_VE/data/output/"
-    window_df = pd.read_csv(output_path + "GTM_MEX_ZAF_date_windows_median_1_15_23.csv")
+    output_path = "../data/output/"
+    window_df = pd.read_csv(output_path + "GTM_MEX_ZAF_date_windows_median.csv")
 
     sympt_list = ['b1_1', 'b1_2', 'b1_3', 'b1_4', 'b1_5', 'b1_6', 'b1_7',
                   'b1_8', 'b1_9', 'b1_10', 'b1_12', 'b1_13']
@@ -179,8 +179,8 @@ def main():
         for cli in severe_combo:
             severe_results_df = vacc_eff_cli(main_df, severe_results_df, region, region, cli, window_sub, 'severe')
 
-    mild_results_df.to_csv(output_path + "GTM_MEX_ZAF_regression_df_2dose_mild_8_27_23.csv", header=True, index=False)
-    severe_results_df.to_csv(output_path + "GTM_MEX_ZAF_regression_df_2dose_severe_8_27_23.csv", header=True, index=False)
+    mild_results_df.to_csv(output_path + "GTM_MEX_ZAF_regression_df_2dose_mild.csv", header=True, index=False)
+    severe_results_df.to_csv(output_path + "GTM_MEX_ZAF_regression_df_2dose_severe.csv", header=True, index=False)
     print('Successfully processed the UMD-CTIS line-list')
     
 if __name__ == '__main__':
