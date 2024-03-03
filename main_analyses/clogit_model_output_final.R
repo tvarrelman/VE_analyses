@@ -49,10 +49,14 @@ ve.function <- function(data) {
   return(main_coef)
 }
 
-# UMD-CTIS data that has been processed using process_regression_df_final.csv 
-#main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose.csv')
+# Below are the various datasets that are used in the analyses
+# uncomment the country filters to produce the individual country estimates
+main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose.csv') #%>% 
+  #filter(iso_3 == 'MEX')
+  #filter(iso_3 == 'ZAF')
+  #filter(iso_3 == 'GTM')
 #main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose_mild.csv')
-main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose_severe.csv')  
+#main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose_severe.csv')  
 
 # subset the data to only the omicron wave
 df_omi <- main_data %>%
@@ -90,8 +94,10 @@ final_result <- rbind(omi_result, delta_result)
 # save the output that will be used to create figures
 #saveRDS(final_result, '../data/output/GTM_MEX_ZAF_clogit_output_df_2dose.rds')
 #saveRDS(final_result, '../data/output/GTM_MEX_ZAF_clogit_output_df_2dose_mild.rds')
-saveRDS(final_result, '../data/output/GTM_MEX_ZAF_clogit_output_df_2dose_severe.rds')
+#saveRDS(final_result, '../data/output/GTM_MEX_ZAF_clogit_output_df_2dose_severe.rds')
 
-
-
+#save indivudal country results
+#saveRDS(final_result, '../data/output/MEX_clogit_output_df_2dose.rds')
+#saveRDS(final_result, '../data/output/ZAF_clogit_output_df_2dose.rds')
+#saveRDS(final_result, '../data/output/GTM_clogit_output_df_2dose.rds')
 
