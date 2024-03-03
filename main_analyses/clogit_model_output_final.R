@@ -8,7 +8,8 @@ library(ggrepel)
 library(viridis)  
 library(ggbeeswarm)
 
-setwd("/Users/tannervarrelman/Documents/Comms_med_VE/data/output/")
+current_dir <- dirname(rstudioapi::getActiveDocumentContext()$path)
+setwd(current_dir)
 
 # function that calculates the regression
 ve.function <- function(data) {
@@ -48,11 +49,11 @@ ve.function <- function(data) {
   return(main_coef)
 }
 
-# UMD-CTIS data that has been processed using process_regression_df_final.csv
-#main_data <- read.csv('GTM_MEX_ZAF_regression_df_2dose_8_27_23.csv')
-main_data <- read.csv('GTM_MEX_ZAF_regression_df_2dose_mild_8_27_23.csv')
-#main_data <- readRDS('GTM_MEX_ZAF_downsample_8_27_23.rds')
-  
+# UMD-CTIS data that has been processed using process_regression_df_final.csv 
+#main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose.csv')
+#main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose_mild.csv')
+main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose_severe.csv')  
+
 # subset the data to only the omicron wave
 df_omi <- main_data %>%
   filter(wave==1)
@@ -87,9 +88,9 @@ delta_result <- ve.function(df_delta) %>%
 final_result <- rbind(omi_result, delta_result)
 
 # save the output that will be used to create figures
-#saveRDS(final_result, 'GTM_MEX_ZAF_clogit_output_df_2dose_8_27_23.rds')
-#saveRDS(final_result, 'GTM_MEX_ZAF_clogit_output_df_2dose_downsampled_8_27_23.rds')
-saveRDS(final_result, 'GTM_MEX_ZAF_clogit_output_df_2dose_mild_8_27_23.rds')
+#saveRDS(final_result, '../data/output/GTM_MEX_ZAF_clogit_output_df_2dose.rds')
+#saveRDS(final_result, '../data/output/GTM_MEX_ZAF_clogit_output_df_2dose_mild.rds')
+saveRDS(final_result, '../data/output/GTM_MEX_ZAF_clogit_output_df_2dose_severe.rds')
 
 
 

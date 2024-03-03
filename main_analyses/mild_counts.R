@@ -1,7 +1,9 @@
 library(tidyverse)
-setwd("/Users/tannervarrelman/Documents/Comms_med_VE/data/output/")
 
-main_data <- read.csv('GTM_MEX_ZAF_regression_df_2dose_mild_9_24_23.csv')
+current_dir <- dirname(rstudioapi::getActiveDocumentContext()$path)
+setwd(current_dir)
+
+main_data <- read.csv('../data/output/GTM_MEX_ZAF_regression_df_2dose_mild.csv')
 
 # subset the data to only the omicron wave
 df_omi <- main_data %>%

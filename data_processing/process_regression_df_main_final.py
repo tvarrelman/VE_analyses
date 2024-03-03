@@ -38,7 +38,8 @@ def vacc_eff_cli2(data, results, region, iso_3, cli_list, window):
         wave = window.wave_p[i]
         start_date = window.start_date[i]
         end_date = window.end_date[i]
-        df1 = data_agg(data, start_date, end_date)
+        data_sub = data_agg(data, start_date, end_date)
+        df1 = data_sub.copy()
         #have symptoms
         df1.loc[(df1[cli_1]==1) & (df1[cli_2]==1) & (df1['b2']<=14), 'synd_id'] = 1
         df1.loc[(df1[cli_1]!=1) | (df1[cli_2]!=1) | (df1['b2']>14), 'synd_id'] = 0

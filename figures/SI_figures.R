@@ -1,20 +1,22 @@
 library(tidyverse)
 library(ggplot2)
-setwd("/Users/tannervarrelman/Documents/Comms_med_VE/data/output/")
 
-main_df <- readRDS('GTM_MEX_ZAF_clogit_output_df_2dose_8_27_23.rds') %>%
+current_dir <- dirname(rstudioapi::getActiveDocumentContext()$path)
+setwd(current_dir)
+
+main_df <- readRDS('../data/output/GTM_MEX_ZAF_clogit_output_df_2dose.rds') %>%
   filter(!sympt2 %in% NA) %>%
   mutate(region = 'MEX+ZAF+GTM')
 
-gtm_df <- readRDS('GTM_clogit_output_df_2dose_8_27_23.rds') %>%
+gtm_df <- readRDS('../data/output/GTM_clogit_output_df_2dose.rds') %>%
   filter(!sympt2 %in% NA) %>%
   mutate(region = 'GTM')
 
-mex_df <- readRDS('MEX_clogit_output_df_2dose_8_27_23.rds') %>%
+mex_df <- readRDS('../data/output/MEX_clogit_output_df_2dose.rds') %>%
   filter(!sympt2 %in% NA) %>%
   mutate(region = 'MEX')
 
-zaf_df <- readRDS('ZAF_clogit_output_df_2dose_8_27_23.rds') %>%
+zaf_df <- readRDS('../data/output/ZAF_clogit_output_df_2dose.rds') %>%
   filter(!sympt2 %in% NA) %>%
   mutate(region = 'ZAF')
 
@@ -102,7 +104,7 @@ fig2a <- ggplot(data=fig_2a_df, aes(y=diff, x=country, color=country)) +
   ylim(-.6, 0)
 fig2a
 
-png('/Users/tannervarrelman/Documents/Comms_med_VE/publication_figures/SI_figure1_S1_8_27_23.png',
+png('../figure_pdfs/SI_figure1.png',
     width=10, height=10, units="cm", res=500)
 print(fig2a)
 dev.off()
@@ -121,7 +123,7 @@ fig2b <- ggplot(data = fig_2b_df, aes(x=sympt_ref, y=diff, color=country)) +
   ylim(-.6, 0)
 fig2b
 
-png('/Users/tannervarrelman/Documents/Comms_med_VE/publication_figures/Figure_S2_8_27_23.png',
+png('../figure_pdfs/Figure_S2.png',
     width=30, height=10, units="cm", res=500)
 print(fig2b)
 dev.off()

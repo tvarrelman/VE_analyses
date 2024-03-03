@@ -7,7 +7,8 @@ library(ggpubr)
 library(RColorBrewer)
 library(circlize)
 
-setwd("/Users/tannervarrelman/Documents/Comms_med_VE/data/output/")
+current_dir <- dirname(rstudioapi::getActiveDocumentContext()$path)
+setwd(current_dir)
 
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   require(grid)
@@ -45,7 +46,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   }
 }
 
-df <- readRDS('GTM_MEX_ZAF_clogit_output_df_2dose_8_27_23.rds') %>%
+df <- readRDS('../data/output/GTM_MEX_ZAF_clogit_output_df_2dose.rds') %>%
   filter(!sympt2 %in% NA)
 
 delt_df <- data.frame()
@@ -197,12 +198,12 @@ test_figure1 <- ggarrange(fig1a, fig1b, fig2b, fig2a, nrow=2, ncol=2, labels=c('
 fig2 <- annotate_figure(figure2, top = text_grob("Median Date, No Filters: South Africa", 
                                       color = "red", face = "bold", size = 14))
 
-#pdf('/Users/tannervarrelman/Documents/Comms_med_VE/publication_figures/Figure1.pdf',
-#    width=7.08661, height=5.3149575)
-#print(figure1)
-#dev.off()
+pdf('../figure_pdfs/Figure1.pdf',
+    width=7.08661, height=5.3149575)
+print(figure1)
+dev.off()
 
-#pdf('/Users/tannervarrelman/Documents/Comms_med_VE/publication_figures/Figure2.pdf',
-#    width=7.08661, height=5.3149575)
-#print(figure2)
-#dev.off()
+pdf('../figure_pdfs/Figure2.pdf',
+    width=7.08661, height=5.3149575)
+print(figure2)
+dev.off()
